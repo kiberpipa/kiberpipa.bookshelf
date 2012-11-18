@@ -3,7 +3,7 @@ SETUP DEVELOPMENT ENVIRONMENT
 
 ::
 
-    $ python bootstrap.py -d
+    $ python2.6 bootstrap.py -d
     $ bin/buildout
     $ bin/pserve --reload development.ini
 
