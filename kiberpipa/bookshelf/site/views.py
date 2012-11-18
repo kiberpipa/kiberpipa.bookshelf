@@ -1,5 +1,5 @@
 import json
-import collections
+import ordereddict
 
 from pysolr import Solr
 from pyramid.view import view_config
@@ -9,7 +9,7 @@ from pyramid.httpexceptions import HTTPFound
 SOLR_BASE_URL = 'http://127.0.0.1:8984/solr/en'
 
 # use ordered dict to keep order for faceted values
-decoder = json.JSONDecoder(object_pairs_hook=collections.OrderedDict)
+decoder = json.JSONDecoder(object_pairs_hook=ordereddict.OrderedDict)
 
 
 @view_config(route_name="book", renderer='book.jinja2')

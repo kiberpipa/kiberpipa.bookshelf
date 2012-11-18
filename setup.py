@@ -37,6 +37,7 @@ setup(
         'dogpile.cache',
         'unittest2',
         'mock',
+        'ordereddict',
 #        'pyramid_webassets',
 #        'pyramid_marrowmailer',
     ],
