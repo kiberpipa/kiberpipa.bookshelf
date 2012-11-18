@@ -1,0 +1,3 @@
+graft kiberpipa.bookshelf
+graft etc
+include *.cfg *.rst *.in LICENSE *.sh

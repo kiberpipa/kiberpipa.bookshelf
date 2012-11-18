@@ -1,0 +1,30 @@
+/*
+Theme Name: Fried Clean
+Theme URI: http://friedcell.si/wordpress/themes/friedclean
+Author: Marko Mrdjenovic
+Author URI: http://friedcell.si/
+Description: A source theme for quick development of child themes. Visually clean and developer friendly. Responsive.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: light, white, one-column, two-columns, left-sidebar, right-sidebar, custom-menu, microformats, translation-ready
+Text Domain: friedclean
+*/
+
+@import url("css/normalize.css");
+
+html, body {margin:0;padding:0;border:0;}
+body {background:#fff;color:#222;}
+
+nav ul, .widget_nav_menu ul {list-style:none;list-style-image:none;margin:0;padding:0;}
+nav li, .widget_nav_menu li {margin:0;padding:0;display:inline-block;}
+nav li > a, nav li > span, .widget_nav_menu li > a,  .widget_nav_menu li > span {padding:0 .5em;}
+
+.site-generator .theme {float:left;}
+.site-generator .cms {float:right;}
+
+@media screen and (min-width:940px) {
+	.two-sidebars .sidebar {float:left;width:50%;}
+	.three-sidebars .sidebar {float:left;width:33.33333333%;}
+	.four-sidebars .sidebar {float:left;width:25%;}
+}

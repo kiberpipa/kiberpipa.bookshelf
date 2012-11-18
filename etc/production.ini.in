@@ -1,0 +1,70 @@
+[app:kiberpipa.bookshelf]
+use = egg:kiberpipa.bookshelf
+
+pyramid.reload_templates = false
+pyramid.debug_authorization = false
+pyramid.debug_notfound = false
+pyramid.debug_routematch = false
+pyramid.default_locale_name = en
+pyramid.includes = 
+    pyramid_tm
+default_locale_name = en
+
+cache.memory.backend = dogpile.cache.memory
+
+[pipeline:main]
+pipeline =
+    raven
+    kiberpipa.bookshelf
+
+[filter:raven]
+use = egg:raven#raven
+dsn = ${secrets:sentry_dsn}
+include_paths = kiberpipa.bookshelf
+
+[server:main]
+use = egg:gunicorn#main
+host = 127.0.0.1
+port = ${config:gunicorn_port}
+
+#---------- Logging Configuration ----------
+[loggers]
+keys = root, kiberpipa.bookshelf, sentry
+
+[handlers]
+keys = console, sentry
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = WARN
+handlers = console, sentry
+
+[logger_sentry]
+level = WARN
+handlers = console
+qualname = sentry.errors
+propagate = 0
+
+[logger_kiberpipa.bookshelf]
+level = WARN
+handlers =
+qualname = kiberpipa.bookshelf
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[handler_sentry]
+class = raven.handlers.logging.SentryHandler
+args = ('${secrets:sentry_dsn}',)
+level = WARNING
+formatter = generic
+
+[formatter_generic]
+format = %(asctime)s %(levelname)-5.5s [%(name)s][%(threadName)s] %(message)s
+
+# End logging configuration
