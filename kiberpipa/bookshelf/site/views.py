@@ -9,7 +9,7 @@ from pyramid.httpexceptions import HTTPFound
 SOLR_BASE_URL = 'http://127.0.0.1:8984/solr/en'
 
 # use ordered dict to keep order for faceted values
-decoder = json.JSONDecoder(object_pairs_hook=ordereddict.OrderedDict)
+decoder = simplejson.JSONDecoder(object_pairs_hook=ordereddict.OrderedDict)
 
 
 @view_config(route_name="book", renderer='book.jinja2')
