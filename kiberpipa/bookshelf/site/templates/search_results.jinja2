@@ -84,10 +84,24 @@
 									<h3>{{ book.get('title', 'Untitled') }}</h3>
 									<p class="year">{{ book['year'] }}</p>
 									<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
+									<p class="language">Language: {{ book.get('language', '') }}</p>
 								</div>
 								<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
 								<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.pdf" class="download">Download</a>
 							</article>
+						{% endfor %}
+						</section>
+
+						<section class="faceted">
+						{% for facet in results.facets['facet_fields'].iterkeys() %}
+						<h4>{{ facet|capitalize }}</h4>
+							{% for value, number in results.facets['facet_fields'][facet].iteritems() %}
+								{% if number > 0%}
+									<a href="{{ with_facet(request, facet, value) }}">
+										{{ value }} (<strong>{{ number }}</strong>)
+									</a><br/>
+								{% endif %}
+							{% endfor %}
 						{% endfor %}
 						</section>
 
