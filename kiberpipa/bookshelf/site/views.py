@@ -3,7 +3,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
 
-SOLR_BASE_URL = 'http://127.0.0.1:8983/solr/en'
+SOLR_BASE_URL = 'http://127.0.0.1:8984/solr/en'
 
 
 @view_config(route_name="book", renderer='book.jinja2')
