@@ -1,4 +1,4 @@
-import json
+import simplejson
 import ordereddict
 
 from pysolr import Solr

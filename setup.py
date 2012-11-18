@@ -38,6 +38,7 @@ setup(
         'unittest2',
         'mock',
         'ordereddict',
+        'simplejson',
 #        'pyramid_webassets',
 #        'pyramid_marrowmailer',
     ],
