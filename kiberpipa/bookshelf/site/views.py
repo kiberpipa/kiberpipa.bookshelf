@@ -30,6 +30,7 @@ def search_results(request):
     params.update({
         'facet': 'true',
         'facet.limit': 20,
+        'facet.mincount': 5,
         'facet.sort': 'count',
         'facet.field': ['language', 'author', 'year'],
         'fl': '*',

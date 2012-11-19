@@ -103,11 +103,9 @@
 						{% for facet in results.facets['facet_fields'].iterkeys() %}
 						<h4>{{ facet|capitalize }}</h4>
 							{% for value, number in results.facets['facet_fields'][facet].iteritems() %}
-								{% if number > 0%}
-									<a href="{{ with_facet(request, facet, value) }}">
-										{{ value }} (<strong>{{ number }}</strong>)
-									</a><br/>
-								{% endif %}
+								<a href="{{ with_facet(request, facet, value) }}">
+									{{ value }} (<strong>{{ number }}</strong>)
+								</a><br/>
 							{% endfor %}
 						{% endfor %}
 						</section>
