@@ -78,16 +78,23 @@
 							<article class="search-res">
 								<span class="cover">
 									<!-- TODO: get book['cover_url'] when we know where to point it to -->
-									<img src="{{request.static_url('kiberpipa.bookshelf.site:static/blank.png')}}" />
+									{% if book.get('openlibrary_id') %}
+										<img src="{{ 'http://covers.openlibrary.org/b/olid/%s-M.jpg' % book['openlibrary_id'] }}" />
+									{% else %}
+										<img src="{{request.static_url('kiberpipa.bookshelf.site:static/blank.png')}}" />
+									{% endif %}
 								</span>
 								<div class="meta">
 									<h3>{{ book.get('title', 'Untitled') }}</h3>
 									<p class="year">{{ book['year'] }}</p>
 									<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
 									<p class="language">Language: {{ book.get('language', '') }}</p>
+									<p class="format">Format: {{ book.get('extension', '') }}</p>
+									<p class="filesize">Size: {{ format_byte_size(book.get('filesize', 0)) }}</p>
+									<p class="pages">Pages: {{ book.get('pages', '') }}</p>
 								</div>
 								<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
-								<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.pdf" class="download">Download</a>
+								<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" class="download">Download</a>
 							</article>
 						{% endfor %}
 						</section>

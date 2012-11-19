@@ -39,6 +39,7 @@ setup(
         'mock',
         'ordereddict',
         'simplejson',
+        'webhelpers',
 #        'pyramid_webassets',
 #        'pyramid_marrowmailer',
     ],

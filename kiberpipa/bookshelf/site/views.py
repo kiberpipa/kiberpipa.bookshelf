@@ -4,6 +4,7 @@ import ordereddict
 from pysolr import Solr
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+from webhelpers.number import format_byte_size
 
 
 SOLR_BASE_URL = 'http://127.0.0.1:8984/solr/en'
@@ -38,10 +39,11 @@ def search_results(request):
         'results': results,
         'q': q,
         'with_facet': with_facet,
+        'format_byte_size': format_byte_size,
     }
 
 
 def with_facet(request, facet, value):
     query = request.GET.copy()
-    query["fq"] = facet + ":" + value
+    query.add('fq', facet + ":" + value)
     return request.current_route_url(_query=query)
