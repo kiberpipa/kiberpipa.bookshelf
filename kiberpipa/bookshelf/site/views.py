@@ -32,7 +32,7 @@ def search_results(request):
         'facet.limit': 20,
         'facet.mincount': 5,
         'facet.sort': 'count',
-        'facet.field': ['language', 'author', 'year'],
+        'facet.field': ['language', 'author_exact', 'year'],
         'fl': '*',
     })
     results = conn.search(q, **params)
@@ -46,5 +46,5 @@ def search_results(request):
 
 def with_facet(request, facet, value):
     query = request.GET.copy()
-    query.add('fq', facet + ":" + value)
+    query.add('fq', '%s:"%s"' % (facet, value))
     return request.current_route_url(_query=query)
