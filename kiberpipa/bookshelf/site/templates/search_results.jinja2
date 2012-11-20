@@ -62,7 +62,7 @@
 					<p>Sooooooooo many books here</p>
 					
 					<form method="GET" action="{{ request.route_url('search_results') }}">
-						<input name="q" />
+						<input name="q" value="{{ q }}" />
 						<span class="button">Search</span>
 					</form>
 				</header>
@@ -94,12 +94,14 @@
 										</span>
 										<div class="meta">
 											<h3>{{ book.get('title', 'Untitled') }}</h3>
-											<p class="year">{{ book['year'] }}</p>
-											<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
-											<p class="language">Language: {{ book.get('language', '') }}</p>
-											<p class="format">Format: {{ book.get('extension', '') }}</p>
-											<p class="filesize">Size: {{ format_byte_size(book.get('filesize', 0)) }}</p>
-											<p class="pages">Pages: {{ book.get('pages', '') }}</p>
+											<dl>
+												<dt>Year</dt><dd>{{ book['year'] }}</dd>
+												<dt>Author(s)</dt><dd>{{ ', '.join(book.get('author', [])) }}</dd>
+												<dt>Language</dt><dd>{{ book.get('language', '') }}</dd>
+												<dt>Format</dt><dd>{{ book.get('extension', '') }}</dd>
+												<dt>Filesize</dt><dd>{{ format_byte_size(book.get('filesize', 0)) }}</dd>
+												<dt>Pages</dt><dd>{{ book.get('pages', '') }}</dd>
+											</dl>
 											<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
 											<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" >Download</a>
 										</div>
@@ -109,15 +111,15 @@
 
 								<section class="faceted">
 									{% for facet in facet_fields.iterkeys() %}
-									<h4>{{ facet|capitalize }}</h4>
+									<h4>{{ facet.split('_')|first|capitalize }}</h4>
 										{% for value, number in facet_fields[facet].iteritems() %}
 											{% if format_facet(facet, value) in facets %}
-												<a href="{{ without_facet(request, facet) }}">
-													<span class="selected">{{ value }} ({{ number }})</span>
+												<a data-num="({{ number }})" href="{{ without_facet(request, facet) }}">
+													<span class="selected">{{ value }}</span>
 												</a>
 											{% else %}
-												<a href="{{ with_facet(request, facet, value) }}">
-													{{ value }} (<strong>{{ number }}</strong>)
+												<a data-num="({{ number }})" href="{{ with_facet(request, facet, value) }}">
+													{{ value }}
 												</a>
 											{% endif %}
 											<br/>
