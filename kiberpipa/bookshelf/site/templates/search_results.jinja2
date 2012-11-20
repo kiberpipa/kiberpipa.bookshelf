@@ -1,8 +1,8 @@
 <!doctype html>
-<!--[if IE 6]><html id="ie6" dir="ltr" lang="en-US"><![endif]-->
-<!--[if IE 7]><html id="ie7" dir="ltr" lang="en-US"><![endif]-->
-<!--[if IE 8]><html id="ie8" dir="ltr" lang="en-US"><![endif]-->
-<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!--><html dir="ltr" lang="en-US"><!--<![endif]-->
+	<!--[if IE 6]><html id="ie6" dir="ltr" lang="en-US"><![endif]-->
+	<!--[if IE 7]><html id="ie7" dir="ltr" lang="en-US"><![endif]-->
+	<!--[if IE 8]><html id="ie8" dir="ltr" lang="en-US"><![endif]-->
+	<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!--><html dir="ltr" lang="en-US"><!--<![endif]-->
 	<head>
 		<meta charset="UTF-8" />
 		<title>Search results | HAIP2012</title>
@@ -19,11 +19,11 @@
 		<script type='text/javascript' src='{{request.static_url('kiberpipa.bookshelf.site:static/js/behaviors.js')}}'></script>
 
 
-<style type="text/css" id="custom-background-css">
-	body.custom-background { background-color: #fff; }
-</style>
+		<style type="text/css" id="custom-background-css">
+			body.custom-background { background-color: #fff; }
+		</style>
 
-<body>
+	<body>
 		<div class="site hfeed">
 			<div class="wrap branding">
 				<header class="branding" role="banner">
@@ -42,15 +42,20 @@
 						</h2>
 					</hgroup>
 					<nav role="navigation">
-						<div class="menu-main-menu-sl-container"><ul id="menu-main-menu-sl" class="menu"><li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="http://2012.haip.cc/festival/">Festival</a></li>
-<li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-25"><a href="http://2012.haip.cc/program/">Program</a></li>
-<li id="menu-item-136" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a href="http://2012.haip.cc/ljudje/">Ljudje</a></li>
-<li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://2012.haip.cc/blog/">Blog</a></li>
-<li id="menu-item-28" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28 disabled"><a href="http://2012.haip.cc/k/katalog/">Katalog</a></li>
-<li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23 disabled"><a href="http://2012.haip.cc/mediji/">Mediji</a></li>
-<li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22 disabled"><a href="http://2012.haip.cc/arhiv/">Arhiv</a></li>
-<li id="menu-item-106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-106"><a href="/en/">[en]</a></li>
-</ul></div>					
+						<div class="menu-main-menu-sl-container">
+							<ul id="menu-main-menu-sl" class="menu">
+								<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26">
+									<a href="http://2012.haip.cc/festival/">Festival</a>
+								</li>
+								<li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-25"><a href="http://2012.haip.cc/program/">Program</a></li>
+								<li id="menu-item-136" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a href="http://2012.haip.cc/ljudje/">Ljudje</a></li>
+								<li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://2012.haip.cc/blog/">Blog</a></li>
+								<li id="menu-item-28" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28 disabled"><a href="http://2012.haip.cc/k/katalog/">Katalog</a></li>
+								<li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23 disabled"><a href="http://2012.haip.cc/mediji/">Mediji</a></li>
+								<li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22 disabled"><a href="http://2012.haip.cc/arhiv/">Arhiv</a></li>
+								<li id="menu-item-106" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-106"><a href="/en/">[en]</a></li>
+							</ul>
+						</div>
 					</nav>
 				</header>
 				<header class="search">
@@ -60,19 +65,17 @@
 						<input name="q" />
 						<span class="button">Search</span>
 					</form>
-					
 				</header>
 			</div>
-<!-- end header -->
-<div class="wrap main">
-	<section class="main">
-		<section class="single page">
-			<article>
-				<header>
-				<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
-					<h1>Here be books:</h1>
-				</header>
-
+		<!-- end header -->
+		<div class="wrap main">
+			<section class="main">
+				<section class="single page">
+					<article>
+						<header>
+						<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
+						<h1>Here be books:</h1>
+						</header>
 						<section class="body">
 						{% for book in results %}
 							<article class="search-res">
@@ -100,54 +103,45 @@
 						</section>
 
 						<section class="faceted">
-						{% for facet in results.facets['facet_fields'].iterkeys() %}
-						<h4>{{ facet|capitalize }}</h4>
-							{% for value, number in results.facets['facet_fields'][facet].iteritems() %}
-								<a href="{{ with_facet(request, facet, value) }}">
-									{{ value }} (<strong>{{ number }}</strong>)
-								</a><br/>
+							{% for facet in results.facets['facet_fields'].iterkeys() %}
+							<h4>{{ facet|capitalize }}</h4>
+								{% for value, number in results.facets['facet_fields'][facet].iteritems() %}
+									<a href="{{ with_facet(request, facet, value) }}">
+										{{ value }} (<strong>{{ number }}</strong>)
+									</a><br/>
+								{% endfor %}
 							{% endfor %}
-						{% endfor %}
 						</section>
 
-						<!--footer -->
-						<footer>
-								<!-- prev/next buttons -->
-								<!--nav class="ears">
-									<a href="#" class="next">GOTO...2</a>
-									<a href="#" class="previous">GOTO...4</a>
-								</nav-->								
-								<section id="comments">
-								</section>
-							</footer>
-						</article>
-					</section>
+					</article>
 				</section>
-			</div>
-			<div class="wrap foot">
-				<footer class="foot" role="contentinfo">
-					<div class="sidebars two-sidebars">
-						<div class="widget-area sidebar sidebar-first sidebar-foot-1" role="complementary">
-							<aside class="widget widget_nav_menu"><div class="menu-main-menu-sl-container"><ul id="menu-main-menu-sl-2" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="http://2012.haip.cc/festival/">Festival</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-25"><a href="http://2012.haip.cc/program/">Program</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a href="http://2012.haip.cc/ljudje/">Ljudje</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://2012.haip.cc/blog/">Blog</a></li>
-<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28 disabled"><a href="http://2012.haip.cc/k/katalog/">Katalog</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23 disabled"><a href="http://2012.haip.cc/mediji/">Mediji</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22 disabled"><a href="http://2012.haip.cc/arhiv/">Arhiv</a></li>
-<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-106"><a href="/en/">[en]</a></li>
-</ul></div></aside>						</div>
-						<div class="widget-area sidebar sidebar-second sidebar-foot-2" role="complementary">
-							<aside class="widget widget_nav_menu"><div class="menu-footer-menu-sl-container"><ul id="menu-footer-menu-sl" class="menu"><li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31"><a href="http://2012.haip.cc/organizatorji/">Organizatorji</a></li>
-<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a href="http://2012.haip.cc/partnerji/">Partnerji</a></li>
-<li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29 disabled"><a href="http://2012.haip.cc/legal/">Legal</a></li>
-</ul></div></aside>						</div>
-					</div>
-					<div class="site-generator">
-						<a class="theme" href="http://friedcell.si/wordpress/themes/friedclean/">FriedClean tema</a>
-					</div>
-				</footer>
-			</div>
+			</section>
+		</div>
+
+		<div class="wrap foot">
+			<footer class="foot" role="contentinfo">
+				<div class="sidebars two-sidebars">
+					<div class="widget-area sidebar sidebar-first sidebar-foot-1" role="complementary">
+						<aside class="widget widget_nav_menu"><div class="menu-main-menu-sl-container"><ul id="menu-main-menu-sl-2" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="http://2012.haip.cc/festival/">Festival</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-25"><a href="http://2012.haip.cc/program/">Program</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a href="http://2012.haip.cc/ljudje/">Ljudje</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://2012.haip.cc/blog/">Blog</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28 disabled"><a href="http://2012.haip.cc/k/katalog/">Katalog</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23 disabled"><a href="http://2012.haip.cc/mediji/">Mediji</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22 disabled"><a href="http://2012.haip.cc/arhiv/">Arhiv</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-106"><a href="/en/">[en]</a></li>
+		</ul></div></aside>						</div>
+					<div class="widget-area sidebar sidebar-second sidebar-foot-2" role="complementary">
+						<aside class="widget widget_nav_menu"><div class="menu-footer-menu-sl-container"><ul id="menu-footer-menu-sl" class="menu"><li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31"><a href="http://2012.haip.cc/organizatorji/">Organizatorji</a></li>
+		<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a href="http://2012.haip.cc/partnerji/">Partnerji</a></li>
+		<li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29 disabled"><a href="http://2012.haip.cc/legal/">Legal</a></li>
+		</ul></div></aside>						</div>
+				</div>
+				<div class="site-generator">
+					<a class="theme" href="http://friedcell.si/wordpress/themes/friedclean/">FriedClean tema</a>
+				</div>
+			</footer>
+		</div>
 		</div>
 	</body>
 </html>

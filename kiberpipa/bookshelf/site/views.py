@@ -9,7 +9,7 @@ from webhelpers.number import format_byte_size
 
 SOLR_BASE_URL = 'http://127.0.0.1:8984/solr/en'
 
-# use ordered dict to keep order for faceted values
+# use ordered dict to keep sorted order for faceted values
 decoder = simplejson.JSONDecoder(object_pairs_hook=ordereddict.OrderedDict)
 
 
