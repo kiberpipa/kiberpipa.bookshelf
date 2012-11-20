@@ -67,81 +67,102 @@
 					</form>
 				</header>
 			</div>
-		<!-- end header -->
-		<div class="wrap main">
-			<section class="main">
-				<section class="single page">
-					<article>
-						<header>
-						<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
-						<h1>Here be books:</h1>
-						</header>
-						<section class="body">
-						{% for book in results %}
-							<article class="search-res">
-								<span class="cover">
-									<!-- TODO: get book['cover_url'] when we know where to point it to -->
-									{% if book.get('openlibrary_id') %}
-										<img src="{{ 'http://covers.openlibrary.org/b/olid/%s-M.jpg' % book['openlibrary_id'] }}" />
-									{% else %}
-										<img src="{{request.static_url('kiberpipa.bookshelf.site:static/blank.png')}}" />
-									{% endif %}
-								</span>
-								<div class="meta">
-									<h3>{{ book.get('title', 'Untitled') }}</h3>
-									<p class="year">{{ book['year'] }}</p>
-									<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
-									<p class="language">Language: {{ book.get('language', '') }}</p>
-									<p class="format">Format: {{ book.get('extension', '') }}</p>
-									<p class="filesize">Size: {{ format_byte_size(book.get('filesize', 0)) }}</p>
-									<p class="pages">Pages: {{ book.get('pages', '') }}</p>
-								</div>
-								<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
-								<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" class="download">Download</a>
-							</article>
-						{% endfor %}
-						</section>
-
-						<section class="faceted">
-							{% for facet in results.facets['facet_fields'].iterkeys() %}
-							<h4>{{ facet|capitalize }}</h4>
-								{% for value, number in results.facets['facet_fields'][facet].iteritems() %}
-									<a href="{{ with_facet(request, facet, value) }}">
-										{{ value }} (<strong>{{ number }}</strong>)
-									</a><br/>
-								{% endfor %}
+			<!-- end header -->
+			<div class="wrap main">
+				<section class="main">
+					<section class="single page">
+						<article>
+							<header>
+							<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
+							<h1>Here be books:</h1>
+							</header>
+							<section class="body">
+							{% for book in results %}
+								<article class="search-res">
+									<span class="cover">
+										<!-- TODO: get book['cover_url'] when we know where to point it to -->
+										{% if book.get('openlibrary_id') %}
+											<img src="{{ 'http://covers.openlibrary.org/b/olid/%s-M.jpg' % book['openlibrary_id'] }}" />
+										{% else %}
+											<img src="{{request.static_url('kiberpipa.bookshelf.site:static/blank.png')}}" />
+										{% endif %}
+									</span>
+									<div class="meta">
+										<h3>{{ book.get('title', 'Untitled') }}</h3>
+										<p class="year">{{ book['year'] }}</p>
+										<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
+										<p class="language">Language: {{ book.get('language', '') }}</p>
+										<p class="format">Format: {{ book.get('extension', '') }}</p>
+										<p class="filesize">Size: {{ format_byte_size(book.get('filesize', 0)) }}</p>
+										<p class="pages">Pages: {{ book.get('pages', '') }}</p>
+										<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
+										<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" >Download</a>
+									</div>
+								</article>
 							{% endfor %}
-						</section>
+							</section>
 
-					</article>
+							<section class="faceted">
+								{% for facet in facet_fields.iterkeys() %}
+								<h4>{{ facet|capitalize }}</h4>
+									{% for value, number in facet_fields[facet].iteritems() %}
+										{% if format_facet(facet, value) in facets %}
+											<a href="{{ without_facet(request, facet) }}">
+												<span class="selected">{{ value }} ({{ number }})</span>
+											</a>
+										{% else %}
+											<a href="{{ with_facet(request, facet, value) }}">
+												{{ value }} (<strong>{{ number }}</strong>)
+											</a>
+										{% endif %}
+										<br/>
+									{% endfor %}
+								{% endfor %}
+							</section>
+
+						</article>
+					</section>
 				</section>
-			</section>
-		</div>
+			</div>
 
-		<div class="wrap foot">
-			<footer class="foot" role="contentinfo">
-				<div class="sidebars two-sidebars">
-					<div class="widget-area sidebar sidebar-first sidebar-foot-1" role="complementary">
-						<aside class="widget widget_nav_menu"><div class="menu-main-menu-sl-container"><ul id="menu-main-menu-sl-2" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="http://2012.haip.cc/festival/">Festival</a></li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-25"><a href="http://2012.haip.cc/program/">Program</a></li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a href="http://2012.haip.cc/ljudje/">Ljudje</a></li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://2012.haip.cc/blog/">Blog</a></li>
-		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28 disabled"><a href="http://2012.haip.cc/k/katalog/">Katalog</a></li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23 disabled"><a href="http://2012.haip.cc/mediji/">Mediji</a></li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22 disabled"><a href="http://2012.haip.cc/arhiv/">Arhiv</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-106"><a href="/en/">[en]</a></li>
-		</ul></div></aside>						</div>
-					<div class="widget-area sidebar sidebar-second sidebar-foot-2" role="complementary">
-						<aside class="widget widget_nav_menu"><div class="menu-footer-menu-sl-container"><ul id="menu-footer-menu-sl" class="menu"><li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31"><a href="http://2012.haip.cc/organizatorji/">Organizatorji</a></li>
-		<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a href="http://2012.haip.cc/partnerji/">Partnerji</a></li>
-		<li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29 disabled"><a href="http://2012.haip.cc/legal/">Legal</a></li>
-		</ul></div></aside>						</div>
+			<div class="wrap foot">
+				<footer class="foot" role="contentinfo">
+					<div class="sidebars two-sidebars">
+						<div class="widget-area sidebar sidebar-first sidebar-foot-1" role="complementary">
+							<aside class="widget widget_nav_menu">
+								<div class="menu-main-menu-sl-container">
+									<ul id="menu-main-menu-sl-2" class="menu">
+										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="http://2012.haip.cc/festival/">Festival</a></li>
+										<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-25"><a href="http://2012.haip.cc/program/">Program</a></li>
+										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a href="http://2012.haip.cc/ljudje/">Ljudje</a></li>
+										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://2012.haip.cc/blog/">Blog</a></li>
+										<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28 disabled"><a href="http://2012.haip.cc/k/katalog/">Katalog</a></li>
+										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23 disabled"><a href="http://2012.haip.cc/mediji/">Mediji</a></li>
+										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22 disabled"><a href="http://2012.haip.cc/arhiv/">Arhiv</a></li>
+										<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-106"><a href="/en/">[en]</a></li>
+									</ul>
+								</div>
+							</aside>
+						</div>
+						<div class="widget-area sidebar sidebar-second sidebar-foot-2" role="complementary">
+							<aside class="widget widget_nav_menu">
+							<div class="menu-footer-menu-sl-container">
+								<ul id="menu-footer-menu-sl" class="menu">
+									<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31">
+										<a href="http://2012.haip.cc/organizatorji/">Organizatorji</a>
+									</li>
+									<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a href="http://2012.haip.cc/partnerji/">Partnerji</a></li>
+									<li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29 disabled"><a href="http://2012.haip.cc/legal/">Legal</a></li>
+								</ul>
+							</div>
+						</aside>
+					</div>
 				</div>
 				<div class="site-generator">
 					<a class="theme" href="http://friedcell.si/wordpress/themes/friedclean/">FriedClean tema</a>
 				</div>
-			</footer>
-		</div>
+				</footer>
+			</div>
 		</div>
 	</body>
 </html>

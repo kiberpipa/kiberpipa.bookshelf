@@ -257,6 +257,8 @@ footer.foot {font-size:.875em;border-width:12px 0 0;padding-top:.85714286em;marg
 .search form input { border: 1px solid #222; height: 1.1em; float: left; margin: -.6875em 0.3em 0; width: 29em;}
 .search .button { line-height: 0.2em; width: 4em;}
 
+section.faceted .selected { color: red }
+
 header.book-desc h2 { margin-top: 0; }
 header.book-desc h3 { margin-bottom: 0; text-decoration: underline; }
 header.book-desc .authors { font-style: italic; font-size: 0.5em; line-height: 1.5em; font-weight: normal; margin-top: 0.5em; }
