@@ -56,7 +56,7 @@
 				<header class="search">
 					<p>Sooooooooo many books here</p>
 					
-					<form method="GET" action="http://books.2012.haip.cc">
+					<form method="GET" action="{{ request.route_url('search_results') }}">
 						<input name="q" />
 						<span class="button">Search</span>
 					</form>
