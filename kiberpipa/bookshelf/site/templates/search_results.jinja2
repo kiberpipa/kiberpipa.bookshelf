@@ -73,52 +73,58 @@
 					<section class="single page">
 						<article>
 							<header>
-							<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
-							<h1>Here be books:</h1>
+								<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
+								{% if results.__len__() %}
+									<h1>Here be books:</h1>
+								{% else %}
+									<h1>No results.</h1>
+								{% endif %}
 							</header>
-							<section class="body">
-							{% for book in results %}
-								<article class="search-res">
-									<span class="cover">
-										<!-- TODO: get book['cover_url'] when we know where to point it to -->
-										{% if book.get('openlibrary_id') %}
-											<img src="{{ 'http://covers.openlibrary.org/b/olid/%s-M.jpg' % book['openlibrary_id'] }}" />
-										{% else %}
-											<img src="{{request.static_url('kiberpipa.bookshelf.site:static/blank.png')}}" />
-										{% endif %}
-									</span>
-									<div class="meta">
-										<h3>{{ book.get('title', 'Untitled') }}</h3>
-										<p class="year">{{ book['year'] }}</p>
-										<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
-										<p class="language">Language: {{ book.get('language', '') }}</p>
-										<p class="format">Format: {{ book.get('extension', '') }}</p>
-										<p class="filesize">Size: {{ format_byte_size(book.get('filesize', 0)) }}</p>
-										<p class="pages">Pages: {{ book.get('pages', '') }}</p>
-										<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
-										<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" >Download</a>
-									</div>
-								</article>
-							{% endfor %}
-							</section>
-
-							<section class="faceted">
-								{% for facet in facet_fields.iterkeys() %}
-								<h4>{{ facet|capitalize }}</h4>
-									{% for value, number in facet_fields[facet].iteritems() %}
-										{% if format_facet(facet, value) in facets %}
-											<a href="{{ without_facet(request, facet) }}">
-												<span class="selected">{{ value }} ({{ number }})</span>
-											</a>
-										{% else %}
-											<a href="{{ with_facet(request, facet, value) }}">
-												{{ value }} (<strong>{{ number }}</strong>)
-											</a>
-										{% endif %}
-										<br/>
-									{% endfor %}
+							{% if results.__len__() %}
+								<section class="body">
+								{% for book in results %}
+									<article class="search-res">
+										<span class="cover">
+											<!-- TODO: get book['cover_url'] when we know where to point it to -->
+											{% if book.get('openlibrary_id') %}
+												<img src="{{ 'http://covers.openlibrary.org/b/olid/%s-M.jpg' % book['openlibrary_id'] }}" />
+											{% else %}
+												<img src="{{request.static_url('kiberpipa.bookshelf.site:static/blank.png')}}" />
+											{% endif %}
+										</span>
+										<div class="meta">
+											<h3>{{ book.get('title', 'Untitled') }}</h3>
+											<p class="year">{{ book['year'] }}</p>
+											<p class="authors">{{ ', '.join(book.get('author', []))}}</p>
+											<p class="language">Language: {{ book.get('language', '') }}</p>
+											<p class="format">Format: {{ book.get('extension', '') }}</p>
+											<p class="filesize">Size: {{ format_byte_size(book.get('filesize', 0)) }}</p>
+											<p class="pages">Pages: {{ book.get('pages', '') }}</p>
+											<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
+											<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" >Download</a>
+										</div>
+									</article>
 								{% endfor %}
-							</section>
+								</section>
+
+								<section class="faceted">
+									{% for facet in facet_fields.iterkeys() %}
+									<h4>{{ facet|capitalize }}</h4>
+										{% for value, number in facet_fields[facet].iteritems() %}
+											{% if format_facet(facet, value) in facets %}
+												<a href="{{ without_facet(request, facet) }}">
+													<span class="selected">{{ value }} ({{ number }})</span>
+												</a>
+											{% else %}
+												<a href="{{ with_facet(request, facet, value) }}">
+													{{ value }} (<strong>{{ number }}</strong>)
+												</a>
+											{% endif %}
+											<br/>
+										{% endfor %}
+									{% endfor %}
+								</section>
+							{% endif %}
 
 						</article>
 					</section>

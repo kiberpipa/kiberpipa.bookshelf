@@ -41,7 +41,6 @@ def search_results(request):
     })
 
     # TODO: get cover data, description from https://developers.google.com/books/docs/v1/reference/volumes
-    # TODO: if we have no results, say that.
     # TODO: refactor logic from template to view
     # TODO: tests
 
