@@ -73,7 +73,7 @@
 					<section class="single page">
 						<article>
 							<header>
-								<p class="search-term">Search results for: <strong>{{ q }}</strong></p>
+								<p class="search-term">{{ results.__len__() }} search results for: <strong>{{ q }}</strong></p>
 								{% if results.__len__() %}
 									<h1>Here be books:</h1>
 								{% else %}
