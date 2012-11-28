@@ -18,10 +18,16 @@ cache.memory.backend = dogpile.cache.memory
 # alembic settings
 script_location = %(here)s/src/kiberpipa.bookshelf/alembic
 
+# deployment specific settings
+trusted_download_host = ${secrets:trusted_download_host}
+untrusted_download_host = ${secrets:untrusted_download_host}
+solr_base_url = ${secrets:solr_base_url}
+allowed_networks = ${secrets:allowed_networks}
+
 [server:main]
 use = egg:waitress#main
-host = 127.0.0.1
-port = 6543
+host = 10.14.129.7
+port = 35001
 
 # Begin logging configuration
 

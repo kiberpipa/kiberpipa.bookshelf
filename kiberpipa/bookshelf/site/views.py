@@ -7,15 +7,12 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from webhelpers.number import format_byte_size
 
+import iptools
 
 log = logging.getLogger(__name__)
 
-
-SOLR_BASE_URL = 'http://127.0.0.1:8984/solr/en'
-
 # use ordered dict to keep sorted order for faceted values
 decoder = simplejson.JSONDecoder(object_pairs_hook=ordereddict.OrderedDict)
-
 
 @view_config(route_name="book", renderer='book.jinja2')
 def book(request):
@@ -25,7 +22,7 @@ def book(request):
 
 @view_config(route_name="search_results", renderer='search_results.jinja2')
 def search_results(request):
-    conn = Solr(SOLR_BASE_URL, decoder=decoder)
+    conn = Solr(request.registry.settings['solr_base_url'], decoder=decoder)
     params = request.GET.copy()
     q = params.pop('q', None)
     if q is None:
@@ -57,6 +54,13 @@ def search_results(request):
     log.debug(params)
     results = conn.search(q, **params)
     log.debug(results)
+
+    allowed_networks = request.registry.settings['allowed_networks'].split(',')
+    if request.client_addr in iptools.IpRangeList(*allowed_networks):
+        is_trusted_ip = True
+    else: 
+        is_trusted_ip = False
+
     return {
         'results': results,
         'q': q,
@@ -66,6 +70,7 @@ def search_results(request):
         'without_facet': without_facet,
         'format_byte_size': format_byte_size,
         'format_facet': format_facet,
+        'is_trusted_ip': is_trusted_ip,
     }
 
 
