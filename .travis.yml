@@ -8,3 +8,6 @@ install:
   - bin/buildout
 script:
   - ./run_tests.sh
+notifications:
+  irc:
+    - "irc.sioff.net#kiberpipa"
