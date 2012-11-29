@@ -3,4 +3,5 @@ def includeme(config):
     config.add_jinja2_search_path("kiberpipa.bookshelf.site:templates")
     config.add_route('book', '/book/{id}')
     config.add_route('search_results', '/')
+    config.add_route('search_results_json', '/.json')
     config.scan('.')

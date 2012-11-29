@@ -21,6 +21,7 @@ def book(request):
 
 
 @view_config(route_name="search_results", renderer='search_results.jinja2')
+@view_config(route_name="search_results_json", renderer='json')
 def search_results(request):
     conn = Solr(request.registry.settings['solr_base_url'], decoder=decoder)
     params = request.GET.copy()
@@ -61,17 +62,24 @@ def search_results(request):
     else: 
         is_trusted_ip = False
 
-    return {
-        'results': results,
+    out = {
+        'results': list(results),
         'q': q,
         'facet_fields': facet_fields,
         'facets': params.get('fq', []),
-        'with_facet': with_facet,
-        'without_facet': without_facet,
-        'format_byte_size': format_byte_size,
-        'format_facet': format_facet,
-        'is_trusted_ip': is_trusted_ip,
     }
+
+    if request.matched_route.name.endswith('json'):
+        return out
+    else:
+        out.update({
+            'with_facet': with_facet,
+            'without_facet': without_facet,
+            'format_byte_size': format_byte_size,
+            'format_facet': format_facet,
+            'is_trusted_ip': is_trusted_ip,
+        })
+        return out
 
 
 def with_facet(request, facet, value):
