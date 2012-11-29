@@ -27,7 +27,7 @@ allowed_networks = ${secrets:allowed_networks}
 [server:main]
 use = egg:waitress#main
 host = 127.0.0.1
-port = 35001
+port = 6543
 
 # Begin logging configuration
 
