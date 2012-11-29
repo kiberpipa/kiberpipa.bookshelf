@@ -10,6 +10,8 @@ SETUP DEVELOPMENT ENVIRONMENT
     $ vim buildout.d/secrets.cfg
     $ python2.6 bootstrap.py -d
     $ bin/buildout
+    # deploy solr to solr/ folder
+    $ java -jar solr/start.jar
     $ bin/pserve --reload development.ini
 
 
