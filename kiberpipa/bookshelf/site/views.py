@@ -24,6 +24,7 @@ def book(request):
 
 
 @view_config(route_name="search_results", renderer='search_results.jinja2')
+@view_config(route_name="search_results_json", renderer='json')
 def search_results(request):
     conn = Solr(SOLR_BASE_URL, decoder=decoder)
     params = request.GET.copy()
@@ -57,16 +58,24 @@ def search_results(request):
     log.debug(params)
     results = conn.search(q, **params)
     log.debug(results)
-    return {
-        'results': results,
+
+    out = {
+        'results': list(results),
         'q': q,
         'facet_fields': facet_fields,
         'facets': params.get('fq', []),
-        'with_facet': with_facet,
-        'without_facet': without_facet,
-        'format_byte_size': format_byte_size,
-        'format_facet': format_facet,
     }
+
+    if request.matched_route.name.endswith('json'):
+        return out
+    else:
+        out.update({
+            'with_facet': with_facet,
+            'without_facet': without_facet,
+            'format_byte_size': format_byte_size,
+            'format_facet': format_facet,
+        })
+        return out
 
 
 def with_facet(request, facet, value):
