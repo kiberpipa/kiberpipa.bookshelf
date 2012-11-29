@@ -40,6 +40,7 @@ setup(
         'ordereddict',
         'simplejson',
         'webhelpers',
+        'iptools'
 #        'pyramid_webassets',
 #        'pyramid_marrowmailer',
     ],
