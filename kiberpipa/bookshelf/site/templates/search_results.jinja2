@@ -103,7 +103,11 @@
 												<dt>Pages</dt><dd>{{ book.get('pages', '') }}</dd>
 											</dl>
 											<!--a href="{{ request.route_url('book', id=book['id']) }}" class="download">More</a-->
-											<a href="http://libgen.info/noleech1.php?hidden=p:{{ book['file_url'] }}&hidden0={{ book['title']}}%20{{ book['year'] }}.{{ book['extension'] }}" >Download</a>
+											{% if is_trusted_ip %}
+											<a href="{{ request.registry.settings['trusted_download_host'] }}{{ book['file_url'] }}" target="_blank">Download</a>
+											{% else %}
+											<a href="{{ request.registry.settings['untrusted_download_host'] }}{{ book['file_url'] }}" target="_blank">Download</a>
+											{% endif %}
 										</div>
 									</article>
 								{% endfor %}

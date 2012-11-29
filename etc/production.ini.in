@@ -12,6 +12,12 @@ default_locale_name = en
 
 cache.memory.backend = dogpile.cache.memory
 
+# deployment specific settings
+trusted_download_host = ${secrets:trusted_download_host}
+untrusted_download_host = ${secrets:untrusted_download_host}
+solr_base_url = ${secrets:solr_base_url}
+allowed_networks = ${secrets:allowed_networks}
+
 [pipeline:main]
 pipeline =
     raven
@@ -20,7 +26,6 @@ pipeline =
 [filter:raven]
 use = egg:raven#raven
 dsn = ${secrets:sentry_dsn}
-include_paths = kiberpipa.bookshelf
 
 [server:main]
 use = egg:gunicorn#main
