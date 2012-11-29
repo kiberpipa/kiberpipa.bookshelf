@@ -13,9 +13,8 @@ def read(*rnames):
 setup(
     name='kiberpipa.bookshelf',
     version='0.1.dev0',
-    description='Simple interface talking to solr storage full of scanned books',
-    long_description=read('README.rst') +
-                     read('HISTORY.rst'),
+    description='Simple interface talking to solr full of books metadata',
+    long_description=read('README.rst') + read('HISTORY.rst'),
     classifiers=[
         "Programming Language :: Python",
         "Framework :: Pyramid",

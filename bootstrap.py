@@ -64,6 +64,7 @@ if not has_broken_dash_S and 'site' in sys.modules:
 # loaded by .pth files.
 clean_path = sys.path[:]
 import site  # imported because of its side effects
+site = site  # pep8
 sys.path[:] = clean_path
 for k, v in sys.modules.items():
     if k in ('setuptools', 'pkg_resources') or (

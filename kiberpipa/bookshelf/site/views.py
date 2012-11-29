@@ -9,10 +9,12 @@ from webhelpers.number import format_byte_size
 
 import iptools
 
+
 log = logging.getLogger(__name__)
 
 # use ordered dict to keep sorted order for faceted values
 decoder = simplejson.JSONDecoder(object_pairs_hook=ordereddict.OrderedDict)
+
 
 @view_config(route_name="book", renderer='book.jinja2')
 def book(request):
@@ -38,7 +40,8 @@ def search_results(request):
         'fl': '*',
     })
 
-    # TODO: get cover data, description from https://developers.google.com/books/docs/v1/reference/volumes
+    # TODO: get cover data, description from
+    # https://developers.google.com/books/docs/v1/reference/volumes
     # TODO: refactor logic from template to view
     # TODO: tests
 
@@ -59,7 +62,7 @@ def search_results(request):
     allowed_networks = request.registry.settings['allowed_networks'].split(',')
     if request.client_addr in iptools.IpRangeList(*allowed_networks):
         is_trusted_ip = True
-    else: 
+    else:
         is_trusted_ip = False
 
     out = {
