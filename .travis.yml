@@ -4,6 +4,8 @@ python:
   - 2.7
   - pypy
 install:
+  - echo -e "[buildout]\nextends = buildout.d/development.cfg" > buildout.cfg
+  - cp buildout.d/secrets.cfg.sample buildout.d/secrets.cfg
   - python bootstrap.py
   - bin/buildout
 script:
