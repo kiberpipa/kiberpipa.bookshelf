@@ -6,7 +6,7 @@ python:
 install:
   - echo -e "[buildout]\nextends = buildout.d/development.cfg" > buildout.cfg
   - cp buildout.d/secrets.cfg.sample buildout.d/secrets.cfg
-  - python bootstrap.py
+  - python bootstrap.py -d
   - bin/buildout
 script:
   - ./run_tests.sh
