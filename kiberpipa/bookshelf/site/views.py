@@ -60,7 +60,11 @@ def search_results(request):
     log.debug(results)
 
     allowed_networks = request.registry.settings['allowed_networks'].split(',')
-    if request.client_addr in iptools.IpRangeList(*allowed_networks):
+    if request.client_addr.startswith('::ffff:'):
+        ip = request.client_addr[len('::ffff:'):]
+    else:
+        ip = request.client_addr
+    if ip in iptools.IpRangeList(*allowed_networks):
         is_trusted_ip = True
     else:
         is_trusted_ip = False
